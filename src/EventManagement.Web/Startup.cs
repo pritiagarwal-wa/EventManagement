@@ -6,6 +6,8 @@ using Microsoft.Extensions.Logging;
 
 using losol.EventManagement.Config;
 using EventManagement.Web.Extensions;
+using NJsonSchema;
+using NSwag.AspNetCore;
 
 namespace losol.EventManagement
 {
@@ -49,6 +51,15 @@ namespace losol.EventManagement
             services.AddInvoicingServices(AppSettings, Configuration);
 			services.AddApplicationServices();
 
+            // Register the Swagger services
+            services.AddSwaggerDocument(document =>
+            {
+                document.PostProcess = d => 
+                {
+                    d.Info.Title = "EventManagement API";
+                };
+            });
+
             // Require SSL
             // TODO Re-enable
             /* if (HostingEnvironment.IsProduction())
@@ -76,6 +87,13 @@ namespace losol.EventManagement
 
             app.UseStaticFiles();
             app.UseAuthentication();
+
+            // Register the Swagger generator and the Swagger UI middlewares
+            // Details: https://github.com/RSuter/NSwag/wiki/AspNetCore-Middleware
+            app.UseSwagger();
+            //app.UseSwaggerUi3;
+            // Enable the Swagger UI middleware and the Swagger generator
+            app.UseSwaggerUi3();
 
             // TODO reenable
             /*

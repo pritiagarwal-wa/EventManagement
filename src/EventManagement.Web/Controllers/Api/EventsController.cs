@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace losol.EventManagement.Web.Api.Controllers
 {
 	[Route("api/v0/events")]
+	[ApiController]
 	public class EventsController : Controller
 	{
 		private readonly IEventInfoService _eventsService;
@@ -20,7 +21,9 @@ namespace losol.EventManagement.Web.Api.Controllers
 			_eventsService = eventsService;
 		}
 
-		[HttpGet, Route("upcoming")]
+
+		// GET: api/v0/events
+		[HttpGet]
 		public async Task<IActionResult> Get()
 		{
 			var events = await _eventsService.GetEventsAsync();
