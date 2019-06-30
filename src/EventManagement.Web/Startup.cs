@@ -51,7 +51,7 @@ namespace losol.EventManagement
 
 			services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
+                c.SwaggerDoc("v1", new Info { Title = "Eventor API", Version = "v1" });
             });
 
 			// Require SSL
@@ -97,7 +97,7 @@ namespace losol.EventManagement
             // specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Eventor API");
             });
             
 			app.UseMvc();
